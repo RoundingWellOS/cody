@@ -7,6 +7,15 @@ declare global {
 		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
+		type CodeEntry = {
+			code: string;
+			description: string;
+			hcc_v24?: number;
+			hcc_v28?: number;
+			is_billable?: boolean;
+			children?: Array<CodeEntry>
+			parent?: CodeEntry;
+		}
 	}
 }
 
