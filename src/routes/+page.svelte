@@ -1,2 +1,10 @@
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
+<script>
+    import { enhance } from '$app/forms';
+</script>
+
+<h1>ICD-10 Library Generator</h1>
+<form method="POST" use:enhance enctype="multipart/form-data">
+    <input name="icd_list" accept=".txt" type="file" />
+    <input name="hcc_map" accept=".csv" type="file" />
+    <button>Generate Library</button>
+</form>
