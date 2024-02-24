@@ -10,14 +10,21 @@
             value: data.data,
             language: 'json',
             automaticLayout: true,
+            readOnly: true,
         })
     });
 </script>
 
+
+<h1 class="title">JSON Library</h1>
 <div class="container" bind:this={container}></div>
 
 <style>
     .container {
-        height: min(800px, 100vh);
+        height: min(600px, 80vh);
+    }
+
+    .title {
+        text-align: center;
     }
 </style>
