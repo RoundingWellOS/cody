@@ -21,11 +21,11 @@
         background-color: var(--primary);
         color: var(--light);
     }
+    
     .title {
-        font-weight: bold;
         margin-left: 16px;
-
     }
+
     .nav {
         display: flex;
         justify-content: flex-end;

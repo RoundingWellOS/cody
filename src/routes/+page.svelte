@@ -21,16 +21,25 @@
 <p class="loading">Processing... this may take a few minutes. Time for coffee.</p>
 {:else}
 <form class="form" method="POST" use:enhance={handleSubmit} enctype="multipart/form-data">
-    <label for="icd_list">Add ICD-10 Code Description Text File</label>
+    <label class="label" for="icd_list">Add ICD-10 Code Description Text File</label>
     <input disabled="{loading}" class="input" name="icd_list" accept=".txt" type="file" />
-    <label for="hcc_map">Add ICD-10 to HCC Mapping CSV File</label>
-    <input disabled="{loading}"  class="input" name="hcc_map" accept=".csv" type="file" />
-    <button disabled="{loading}"  class="submit">Generate Resources</button>
+    <label class="label" for="hcc_map">Add ICD-10 to HCC Mapping CSV File</label>
+    <input disabled="{loading}" class="input" name="hcc_map" accept=".csv" type="file" />
+    <button disabled="{loading}" class="submit">Generate Resources</button>
 </form>
 {#if form?.error}
 <p class="error">{form?.message}</p>
 {/if}
 {/if}
+
+<aside class="instructions">
+    <h3>Instructions</h3>
+    <p>The most recent files can be found for download at the following URLs:</p>
+    <ul>
+        <li><a href="https://www.cdc.gov/nchs/icd/Comprehensive-Listing-of-ICD-10-CM-Files.htm" target="_blank">Comprehensive Listing of ICD-10 CM Files (CDC)</a></li>
+        <li><a href="https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats/risk-adjustors/2024-model-software/icd-10-mappings" target="_blank">ICD-10 Mappings (CMS)</a></li>
+    </ul>
+</aside>
 
 <style>
     .title {
@@ -38,11 +47,24 @@
     }
 
     .form {
-        max-width: 800px;
-        margin: 0 auto;
         display: flex;
         flex-direction: column;
-        gap: 16px;
+    }
+
+    .form,
+    .instructions {
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .instructions {
+        margin-top: 65px;
+    }
+
+    .label,
+    .submit {
+        margin-bottom: 8px;
+        margin-top: 32px;
     }
 
     input[type=file]::file-selector-button,
