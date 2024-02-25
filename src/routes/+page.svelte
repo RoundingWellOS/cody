@@ -38,7 +38,7 @@
     }
 
     .form {
-        max-width: 600px;
+        max-width: 800px;
         margin: 0 auto;
         display: flex;
         flex-direction: column;
@@ -57,15 +57,15 @@
     }
 
     input[type=file]::file-selector-button:hover,
-    .submit:hover,
     input[type=file]::file-selector-button:active,
+    .submit:hover,
     .submit:active {
         background-color: var(--accent);
     }
 
     input[type=file]::file-selector-button:disabled,
-    .submit:disabled,
     input[type=file]::file-selector-button:disabled,
+    .submit:disabled,
     .submit:disabled {
         background-color: var(--secondary);
         cursor: not-allowed;
