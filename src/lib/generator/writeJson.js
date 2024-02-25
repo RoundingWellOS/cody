@@ -183,7 +183,7 @@ function writeJSONLibrary() {
     const results = formatAllCodesWithPeriod(reducedList);
 
     // Write directory
-    fs.writeFileSync(join(__dirname, `src/library/icd_codes.json`), JSON.stringify(results, null, 4));
+    fs.writeFileSync(join(__dirname, `src/assets/icd_codes.json`), JSON.stringify(results, null, 4));
 }
 
 export default writeJSONLibrary;

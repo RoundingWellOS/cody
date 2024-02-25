@@ -25,7 +25,7 @@
     <input disabled="{loading}" class="input" name="icd_list" accept=".txt" type="file" />
     <label for="hcc_map">Add ICD-10 to HCC Mapping CSV File</label>
     <input disabled="{loading}"  class="input" name="hcc_map" accept=".csv" type="file" />
-    <button disabled="{loading}"  class="submit">Generate Library</button>
+    <button disabled="{loading}"  class="submit">Generate Resources</button>
 </form>
 {#if form?.error}
 <p class="error">{form?.message}</p>

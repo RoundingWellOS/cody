@@ -39,7 +39,7 @@
     });
 </script>
 
-<h1 class="title">CSV Library</h1>
+<h1 class="title">CSV Resource</h1>
 <div class="container" bind:this={container}></div>
 
 <style>
