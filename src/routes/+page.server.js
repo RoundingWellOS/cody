@@ -25,9 +25,9 @@ export const actions = {
         if (!isValidFile(descriptionFile) || !isValidFile(mappingFile)) return fail(400, { error: true, message: 'You must submit two valid files.' });
 
         // @ts-ignore
-        writeFileSync(join(__dirname, 'src/files/icd_descriptions.txt'), Buffer.from(await descriptionFile.arrayBuffer()));
+        writeFileSync(join(__dirname, 'src/files/input/icd_descriptions.txt'), Buffer.from(await descriptionFile.arrayBuffer()));
         // @ts-ignore
-        writeFileSync(join(__dirname, `src/files/hcc_mappings.csv`), Buffer.from(await mappingFile.arrayBuffer()));
+        writeFileSync(join(__dirname, `src/files/input/hcc_mappings.csv`), Buffer.from(await mappingFile.arrayBuffer()));
         
         writeJSONLibrary();
         writeCsvLibrary();

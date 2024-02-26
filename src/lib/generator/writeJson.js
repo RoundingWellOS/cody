@@ -166,11 +166,11 @@ function formatAllCodesWithPeriod(reducedList) {
 
 function writeJSONLibrary() {
     // Parse ICD Code/Description text file
-    const icdDescriptionFile = fs.readFileSync(join(__dirname, 'src/files/icd_descriptions.txt'), 'utf8');
+    const icdDescriptionFile = fs.readFileSync(join(__dirname, 'src/files/input/icd_descriptions.txt'), 'utf8');
     const icdList = parseTextFile(icdDescriptionFile);
 
     // Parse ICD-10/HCC Mapping CSV
-    const icdMappingFile = fs.readFileSync(join(__dirname, `src/files/hcc_mappings.csv`), 'utf8');
+    const icdMappingFile = fs.readFileSync(join(__dirname, `src/files/input/hcc_mappings.csv`), 'utf8');
     const hccList = parseCsvFile(icdMappingFile);
 
     // Join two parsed files
@@ -183,7 +183,7 @@ function writeJSONLibrary() {
     const results = formatAllCodesWithPeriod(reducedList);
 
     // Write directory
-    fs.writeFileSync(join(__dirname, `src/assets/icd_codes.json`), JSON.stringify(results, null, 4));
+    fs.writeFileSync(join(__dirname, `src/files/output/icd_codes.json`), JSON.stringify(results, null, 4));
 }
 
 export default writeJSONLibrary;

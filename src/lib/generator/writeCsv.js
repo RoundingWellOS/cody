@@ -6,7 +6,7 @@ const __dirname = resolve(dirname(''));
 
 function writeCsvLibrary() {
     /**@type {Array<App.CodeEntry>} */
-    const jsonLibrary =  JSON.parse(fs.readFileSync(join(__dirname, 'src/assets/icd_codes.json'), 'utf8'));
+    const jsonLibrary =  JSON.parse(fs.readFileSync(join(__dirname, 'src/files/output/icd_codes.json'), 'utf8'));
     const head = 'code,description,hcc_v24,hcc_v28,is_billable,parent,children';
     const rows =  _.map(jsonLibrary, entry => {
         const parent = entry.parent ? entry.parent.code : '';
@@ -16,7 +16,7 @@ function writeCsvLibrary() {
 
     rows.unshift(head);
 
-    fs.writeFileSync(join(__dirname, `src/assets/icd_codes.csv`), rows.join('\n'));
+    fs.writeFileSync(join(__dirname, `src/files/output/icd_codes.csv`), rows.join('\n'));
 }
 
 export default writeCsvLibrary;
