@@ -12,7 +12,7 @@ declare global {
 			description: string;
 			hcc_v24?: number;
 			hcc_v28?: number;
-			is_billable?: boolean;
+			is_specific?: boolean;
 			children?: Array<CodeEntry>
 			parent?: CodeEntry;
 		}

@@ -135,8 +135,8 @@ function createListWithCodeAssociations(mappedList) {
             entry.children = children;
         }
 
-        // Determine if the entry is billable based on the presence of children
-        entry.is_billable = !children.length;
+        // Determine if the entry is most specific in category based on the presence of children
+        entry.is_specific = !children.length;
 
         // Push the entry to the memo
         // @ts-ignore
