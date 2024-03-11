@@ -1,7 +1,6 @@
 {
     "name": "icd-library",
     "version": "0.0.1",
-    "private": true,
     "scripts": {
         "start": "npm install && npm run dev -- --open",
         "dev": "vite dev",
