@@ -1,10 +1,9 @@
 import fs from 'fs';
-import { join, dirname, resolve } from 'path';
 
-const __dirname = resolve(dirname(''));
+import { icdCodesCsvFilePath } from '$lib/generator';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-    const data = fs.readFileSync(join(__dirname, 'src/files/output/icd_codes.csv'), 'utf8');
+    const data = fs.readFileSync(icdCodesCsvFilePath, 'utf8');
     return { data };
 }

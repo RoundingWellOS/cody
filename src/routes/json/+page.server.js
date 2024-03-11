@@ -1,10 +1,9 @@
 import fs from 'fs';
-import { join, dirname, resolve } from 'path';
 
-const __dirname = resolve(dirname(''));
+import { icdCodesJsonFilePath } from '$lib/generator';
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-    const data = fs.readFileSync(join(__dirname, 'src/files/output/icd_codes.json'), 'utf8');
+    const data = fs.readFileSync(icdCodesJsonFilePath, 'utf8');
     return { data };
 }

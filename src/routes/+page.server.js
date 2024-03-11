@@ -1,9 +1,12 @@
 import { fail } from '@sveltejs/kit';
 import { writeFileSync } from 'fs';
-import { join, dirname, resolve } from 'path';
-import { writeJSONLibrary, writeCsvLibrary } from '$lib/generator';
 
-const __dirname = resolve(dirname(''));
+import {
+    writeJSONLibrary,
+    writeCsvLibrary,
+    icdDescriptionsFilePath,
+    hccMappingsFilePath,
+} from '$lib/generator';
 
 /**
  * Verify that the argument is a valid File
@@ -26,15 +29,9 @@ export const actions = {
             return fail(400, { error: true, message: 'You must submit two valid files.' });
 
         // @ts-ignore
-        writeFileSync(
-            join(__dirname, 'src/files/input/icd_descriptions.txt'),
-            Buffer.from(await descriptionFile.arrayBuffer()),
-        );
+        writeFileSync(icdDescriptionsFilePath, Buffer.from(await descriptionFile.arrayBuffer()));
         // @ts-ignore
-        writeFileSync(
-            join(__dirname, `src/files/input/hcc_mappings.csv`),
-            Buffer.from(await mappingFile.arrayBuffer()),
-        );
+        writeFileSync(hccMappingsFilePath, Buffer.from(await mappingFile.arrayBuffer()));
 
         writeJSONLibrary();
         writeCsvLibrary();
