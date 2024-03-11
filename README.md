@@ -1,11 +1,11 @@
 # RoundingWell ICD-10 Library
 
-This repo is used to generate a mapped ICD-10 JSON file that includes associated HCC codes. 
+This repo is used to generate a mapped ICD-10 JSON file that includes associated HCC codes.
 
 ## Use of this repo
 
-* Clone down
-* `npm start`
+- Clone down
+- `npm start`
 
 ## Files
 

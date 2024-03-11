@@ -34,10 +34,10 @@ export function parseRow(inputString) {
  * @param {string} string - The input string representing the ICD code.
  * @returns {string} The formatted ICD code.
  */
-export function formatIcdWithPeriod(string){
+export function formatIcdWithPeriod(string) {
     const trimmed = string.trim();
     if (trimmed.length < 4) return trimmed;
-    return trimmed.slice(0, 3) + '.' +  trimmed.slice(3);
+    return trimmed.slice(0, 3) + '.' + trimmed.slice(3);
 }
 
 /**
