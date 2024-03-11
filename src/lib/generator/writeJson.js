@@ -203,7 +203,7 @@ function writeJSONLibrary() {
     // Write directory
     fs.writeFileSync(
         join(__dirname, `src/files/output/icd_codes.json`),
-        JSON.stringify(results, null, 4),
+        JSON.stringify(_.orderBy(results, 'code'), null, 4),
     );
 }
 
