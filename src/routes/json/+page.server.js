@@ -5,6 +5,6 @@ const __dirname = resolve(dirname(''));
 
 /** @type {import('./$types').PageServerLoad} */
 export async function load() {
-    const data = fs.readFileSync(join(__dirname, 'src/files/output/icd_codes.json'), 'utf8');	
-    return {	data	};
+    const data = fs.readFileSync(join(__dirname, 'src/files/output/icd_codes.json'), 'utf8');
+    return { data };
 }
