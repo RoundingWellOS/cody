@@ -1,5 +1,7 @@
 # RoundingWell ICD-10 Library
 
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/RoundingWellOS/cody/tree/main.svg?style=svg)](https://dl.circleci.com/status-badge/redirect/gh/RoundingWellOS/cody/tree/main)
+
 This repo is used to generate a mapped ICD-10 JSON file that includes associated HCC codes.
 
 ## Use of this repo
