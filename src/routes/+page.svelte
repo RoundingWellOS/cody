@@ -37,9 +37,8 @@
   <p>The most recent files can be found for download at the following URLs:</p>
   <ul>
     <li>
-      <a
-        href="https://www.cdc.gov/nchs/icd/icd-10-cm/files.html"
-        target="_blank">Comprehensive Listing of ICD-10 CM Files (CDC)</a
+      <a href="https://www.cdc.gov/nchs/icd/icd-10-cm/files.html" target="_blank"
+        >Comprehensive Listing of ICD-10 CM Files (CDC)</a
       >
     </li>
     <li>
