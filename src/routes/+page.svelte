@@ -38,13 +38,13 @@
   <ul>
     <li>
       <a
-        href="https://www.cdc.gov/nchs/icd/Comprehensive-Listing-of-ICD-10-CM-Files.htm"
+        href="https://www.cdc.gov/nchs/icd/icd-10-cm/files.html"
         target="_blank">Comprehensive Listing of ICD-10 CM Files (CDC)</a
       >
     </li>
     <li>
       <a
-        href="https://www.cms.gov/medicare/health-plans/medicareadvtgspecratestats/risk-adjustors/2024-model-software/icd-10-mappings"
+        href="https://www.cms.gov/medicare/payment/medicare-advantage-rates-statistics/risk-adjustment/2025-model-software/icd-10-mappings"
         target="_blank">ICD-10 Mappings (CMS)</a
       >
     </li>
