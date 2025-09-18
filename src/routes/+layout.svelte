@@ -1,13 +1,13 @@
 <script>
+  import { resolve } from '$app/paths';
   import '@fontsource-variable/noto-sans';
   import '../global.css';
 </script>
 
 <header class="header">
-  <a class="link title" href="/">RWell ICD-10 Library</a>
+  <a class="link title" href={resolve('/')}>Cody</a>
   <nav class="nav">
-    <a class="link" href="/json">JSON</a>
-    <a class="link" href="/csv">CSV</a>
+    <a class="link" href={resolve('/list')}>View Files</a>
   </nav>
 </header>
 
@@ -18,32 +18,34 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: var(--primary);
-    color: var(--light);
+    padding: var(--space-4) var(--space-6);
+    background: var(--color-surface);
+    border-bottom: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
   }
 
   .title {
-    margin-left: 16px;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-primary);
+    text-decoration: none;
   }
 
   .nav {
     display: flex;
-    justify-content: flex-end;
-    gap: 16px;
-    margin: 16px;
+    gap: var(--space-4);
   }
 
   .link {
+    color: var(--color-text-primary);
     text-decoration: none;
-    transition: color 0.2s ease;
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-medium);
+    padding: var(--space-1) var(--space-2);
+    transition: color var(--transition-fast);
   }
 
-  .link:active,
   .link:hover {
-    color: var(--accent);
-  }
-
-  .link:visited {
-    color: var(--light);
+    color: var(--color-primary);
   }
 </style>

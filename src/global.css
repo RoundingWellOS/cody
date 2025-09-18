@@ -1,21 +1,298 @@
-html,
-body {
+/* --------------------
+   CSS Reset
+-------------------- */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
+html,
+body {
+  height: 100%;
+  font-family: var(--font-family-base);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  color: var(--color-text-primary);
+  background-color: var(--color-background);
+}
+
+img,
+picture,
+video,
+canvas,
+svg {
+  display: block;
+  max-width: 100%;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+  border: none;
+  background: none;
+}
+
+ul,
+ol {
+  list-style: none;
+}
+
+/* --------------------
+   Design Tokens
+-------------------- */
 :root {
-  --font-family: 'Noto Sans Variable', sans-serif;
+  /* Typography */
+  --font-family-base: 'Inter', 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+  --font-size-xs: 0.75rem; /* 12px */
+  --font-size-sm: 0.875rem; /* 14px */
+  --font-size-base: 1rem; /* 16px */
+  --font-size-lg: 1.125rem; /* 18px */
+  --font-size-xl: 1.25rem; /* 20px */
+  --line-height-base: 1.5;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
 
   /* Colors */
-  --primary: #30343f;
-  --secondary: #333;
-  --accent: #228cdb;
-  --light: #fcf7ff;
+  --color-background: #ffffff;
+  --color-surface: #f9fafb;
+  --color-surface-alt: #f3f4f6;
+  --color-border: #e5e7eb;
+  --color-border-strong: #d1d5db;
+
+  --color-text-primary: #111827;
+  --color-text-secondary: #4b5563;
+  --color-text-muted: #6b7280;
+  --color-text-inverse: #ffffff;
+
+  --color-primary: #2563eb; /* Blue (links/buttons) */
+  --color-primary-hover: #1d4ed8;
+  --color-primary-light: #dbeafe;
+  --color-success: #10b981; /* Green (proceed button) */
+  --color-success-hover: #059669;
+  --color-warning: #f59e0b;
+  --color-danger: #ef4444;
+  --color-disabled: #9ca3af;
+
+  /* Spacing (4px scale) */
+  --space-0: 0;
+  --space-1: 0.25rem; /* 4px */
+  --space-2: 0.5rem; /* 8px */
+  --space-3: 0.75rem; /* 12px */
+  --space-4: 1rem; /* 16px */
+  --space-5: 1.25rem; /* 20px */
+  --space-6: 1.5rem; /* 24px */
+  --space-8: 2rem; /* 32px */
+  --space-10: 2.5rem; /* 40px */
+
+  /* Width */
+  --max-width-container: 700px;
+
+  /* Borders */
+  --radius-sm: 0.25rem; /* 4px */
+  --radius-md: 0.375rem; /* 6px */
+  --radius-lg: 0.5rem; /* 8px */
+  --radius-full: 9999px;
+
+  --border-width: 1px;
+
+  /* Shadows */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.15);
+
+  /* Transitions */
+  --transition-fast: 150ms ease-in-out;
+  --transition-base: 250ms ease-in-out;
+
+  /* Form Inputs */
+  --input-font-size: var(--font-size-base);
+  --input-font-weight: var(--font-weight-regular);
+  --input-line-height: var(--line-height-base);
+
+  --input-color-text: var(--color-text-primary);
+  --input-color-placeholder: var(--color-text-muted);
+  --input-color-background: #ffffff;
+  --input-color-border: var(--color-border);
+  --input-color-border-hover: var(--color-border-strong);
+  --input-color-border-focus: var(--color-primary);
+  --input-color-disabled: #f3f4f6;
+
+  --input-padding-y: var(--space-2); /* 8px vertical */
+  --input-padding-x: var(--space-3); /* 12px horizontal */
+  --input-radius: var(--radius-sm);
+  --input-border-width: var(--border-width);
+
+  --input-shadow-focus: 0 0 0 3px rgba(37, 99, 235, 0.2);
+
+  /* Buttons */
+  --button-font-size: var(--font-size-sm);
+  --button-font-weight: var(--font-weight-medium);
+  --button-padding-y: var(--space-2);
+  --button-padding-x: var(--space-4);
+  --button-radius: var(--radius-sm);
+  --button-border-width: var(--border-width);
+
+  --button-color-text: var(--color-text-inverse);
+  --button-color-background: var(--color-primary);
+  --button-color-background-hover: var(--color-primary-hover);
+
+  --button-color-success: var(--color-success);
+  --button-color-success-hover: var(--color-success-hover);
+
+  --button-color-secondary: #f3f4f6;
+  --button-color-secondary-hover: #e5e7eb;
+  --button-color-secondary-text: var(--color-text-secondary);
+
+  --button-color-disabled: var(--color-disabled);
+  --button-color-disabled-text: #f9fafb;
 }
 
-body {
-  font-family: var(--font-family);
-  color: var(--primary);
+/* --------------------
+   Form Inputs
+-------------------- */
+input[type='text'],
+input[type='date'],
+select,
+textarea {
+  width: 100%;
+  font-size: var(--input-font-size);
+  font-weight: var(--input-font-weight);
+  line-height: var(--input-line-height);
+  color: var(--input-color-text);
+  background-color: var(--input-color-background);
+  border: var(--input-border-width) solid var(--input-color-border);
+  border-radius: var(--input-radius);
+  padding: var(--input-padding-y) var(--input-padding-x);
+  transition:
+    border-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+input::placeholder,
+select::placeholder,
+textarea::placeholder {
+  color: var(--input-color-placeholder);
+}
+
+input:hover,
+select:hover,
+textarea:hover {
+  border-color: var(--input-color-border-hover);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  border-color: var(--input-color-border-focus);
+  outline: none;
+  box-shadow: var(--input-shadow-focus);
+}
+
+input:disabled,
+select:disabled,
+textarea:disabled {
+  background-color: var(--input-color-disabled);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* --------------------
+   Buttons
+-------------------- */
+button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--button-font-size);
+  font-weight: var(--button-font-weight);
+  border-radius: var(--button-radius);
+  padding: var(--button-padding-y) var(--button-padding-x);
+  border: var(--button-border-width) solid transparent;
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast),
+    color var(--transition-fast);
+}
+
+/* Primary button (blue) */
+.button-primary {
+  background-color: var(--button-color-background);
+  color: var(--button-color-text);
+}
+
+.button-primary:hover {
+  background-color: var(--button-color-background-hover);
+}
+
+/* Success button (green) */
+.button-success {
+  background-color: var(--button-color-success);
+  color: var(--button-color-text);
+}
+
+.button-success:hover {
+  background-color: var(--button-color-success-hover);
+}
+
+/* Secondary button (gray/cancel) */
+.button-secondary {
+  background-color: var(--button-color-secondary);
+  color: var(--button-color-secondary-text);
+}
+
+.button-secondary:hover {
+  background-color: var(--button-color-secondary-hover);
+}
+
+/* Disabled */
+button:disabled,
+.button-disabled {
+  background-color: var(--button-color-disabled);
+  color: var(--button-color-disabled-text);
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+/* --------------------
+   Example Utility Classes
+-------------------- */
+.text-primary {
+  color: var(--color-primary);
+}
+.text-secondary {
+  color: var(--color-text-secondary);
+}
+.text-muted {
+  color: var(--color-text-muted);
+}
+
+.bg-primary {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+.bg-surface {
+  background-color: var(--color-surface);
+}
+
+.rounded {
+  border-radius: var(--radius-md);
+}
+.shadow {
+  box-shadow: var(--shadow-sm);
+}
+
+.p-4 {
+  padding: var(--space-4);
+}
+.m-4 {
+  margin: var(--space-4);
 }

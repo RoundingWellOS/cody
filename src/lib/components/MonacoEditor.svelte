@@ -1,56 +1,126 @@
 <script>
-  import { onMount } from 'svelte';
-  import editorWorker from 'monaco-editor/esm/vs/editor/editor.worker?worker';
-  import jsonWorker from 'monaco-editor/esm/vs/language/json/json.worker?worker';
-  import cssWorker from 'monaco-editor/esm/vs/language/css/css.worker?worker';
-  import htmlWorker from 'monaco-editor/esm/vs/language/html/html.worker?worker';
-  import tsWorker from 'monaco-editor/esm/vs/language/typescript/ts.worker?worker';
+  import { onMount, onDestroy } from 'svelte';
+  // If using the Monaco loader utility (installed via NPM):
+  import loader from '@monaco-editor/loader';
+  const { data } = $props();
 
-  export let data = '';
-  export let language = '';
-  export let title = '';
-
-  /**@type {HTMLElement}*/
-  let container;
+  /**
+   * Reference to the DOM element that will host the JSON editor UI (e.g. Monaco, CodeMirror).
+   *
+   * Lifecycle:
+   * - null during SSR / before onMount
+   * - Set to the bound HTMLElement after the component mounts
+   *
+   * Usage in markup (example):
+   *   <div bind:this={editorContainer} class="editor"></div>
+   *
+   * Always null-check before using:
+   *   if (editorContainer) {
+   *     // Safe to initialize editor with editorContainer
+   *   }
+   *
+   * @type {HTMLDivElement}
+   */
+  let editorContainer;
+  /** @type {import('monaco-editor').editor.IStandaloneCodeEditor | null} */
+  let editor = null;
+  /** @type {typeof import('monaco-editor') | null} */
+  let monaco = null;
 
   onMount(async () => {
-    self.MonacoEnvironment = {
-      getWorker: function (_moduleId, label) {
-        if (label === 'json') {
-          return new jsonWorker();
-        }
-        if (label === 'css' || label === 'scss' || label === 'less') {
-          return new cssWorker();
-        }
-        if (label === 'html' || label === 'handlebars' || label === 'razor') {
-          return new htmlWorker();
-        }
-        if (label === 'typescript' || label === 'javascript') {
-          return new tsWorker();
-        }
-        return new editorWorker();
-      },
-    };
+    // Initialize Monaco Editor (loads from CDN by default)
+    monaco = await loader.init(); // returns the global monaco instance
 
-    const monaco = await import('monaco-editor');
-    monaco.editor.create(container, {
-      value: data,
-      language,
-      automaticLayout: true,
-      readOnly: true,
+    // Register CSV language if not already registered
+    if (!monaco.languages.getLanguages().some((l) => l.id === 'csv')) {
+      monaco.languages.register({ id: 'csv' });
+      monaco.languages.setMonarchTokensProvider('csv', {
+        tokenizer: {
+          root: [
+            [/".*?"/, 'string'],
+            [/[^,]+/, 'variable'],
+            [/,/, 'delimiter'],
+          ],
+        },
+      });
+    }
+
+    // Create the editor in the container
+    editor = monaco.editor.create(editorContainer, {
+      value: data.data,
+      language: data.language,
     });
+  });
+
+  onDestroy(() => {
+    // Cleanup: dispose editor and any models to avoid memory leaks
+    editor?.dispose();
+    monaco?.editor.getModels().forEach((model) => model.dispose());
   });
 </script>
 
-<h1 class="title">{title}</h1>
-<div class="container" bind:this={container}></div>
+<div class="container">
+  <div class="header">
+    <span class="badge {data.language === 'javascript' ? 'json' : 'csv'}">
+      {#if data.language === 'javascript'}JSON{:else}CSV{/if}
+    </span>
+  </div>
+  <div class="editor-shell">
+    <div class="editor" bind:this={editorContainer}></div>
+  </div>
+</div>
 
 <style>
   .container {
-    height: min(600px, 80vh);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: var(--shadow-sm);
+    padding: var(--space-4);
+    margin: var(--space-6) auto;
+    max-width: var(--max-width-container);
   }
 
-  .title {
-    text-align: center;
+  .header {
+    display: flex;
+    align-items: center;
+    margin-bottom: var(--space-3);
+  }
+
+  .badge {
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-semibold);
+    border-radius: var(--radius-full);
+    padding: 0 var(--space-3);
+    height: 2rem;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.05em;
+  }
+
+  /* Match list page badge colors */
+  .badge.json {
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+  }
+
+  .badge.csv {
+    background: var(--color-success);
+    color: var(--color-text-inverse);
+  }
+
+  .editor-shell {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: var(--color-background);
+    min-height: 320px;
+    height: 400px;
+    overflow: hidden;
+    box-shadow: var(--shadow-sm);
+  }
+
+  .editor {
+    width: 100%;
+    height: 100%;
   }
 </style>
