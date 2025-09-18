@@ -53,7 +53,7 @@ export function isValidIcdLength(length) {
 /**
  * Extracts a 4-digit year from a file name.
  * @param {string} fileName - The file name to extract the year from.
- * @returns {number} The extracted year, or 'unknown' if not found.
+ * @returns {number} The extracted year, or 0 if not found.
  */
 export function parseYearFromName(fileName) {
     const match = fileName.match(/(\d{4})/);
