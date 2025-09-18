@@ -11,8 +11,7 @@
       <ul class="file-list">
         {#each files as file (file)}
           <li class="file-item">
-            <a class="file-link" href={resolve(`/view/${file}`)}
-              >">
+            <a class="file-link" href={resolve(`/view/${file}`)}>
               <span class="badge {file.includes('json') ? 'json' : 'csv'}">
                 {file.includes('json') ? 'JSON' : 'CSV'}
               </span>
