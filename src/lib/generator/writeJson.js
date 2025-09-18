@@ -3,8 +3,6 @@ import _ from 'lodash';
 
 import { parseRow, formatIcdWithPeriod } from '$lib/utils';
 
-import { icdCodesJsonFilePath, hccMappingsFilePath, icdDescriptionsFilePath } from '.';
-
 /**
  * Parses a text file content into an array of objects containing code and description.
  * @param {string} textFile - The content of the text file as a string.
@@ -129,17 +127,39 @@ export function parseFiles(icdDescriptionFile, icdMappingFile) {
     return JSON.stringify(results, null, 4);
 }
 
-function writeJSONLibrary() {
+/**
+ * Generates a JSON library by parsing an ICD code/description text file and an ICD-10 to HCC mapping CSV,
+ * then writing the combined structured data to the specified JSON output path.
+ *
+ * This function:
+ * 1. Reads a plain text file containing ICD codes and their descriptions.
+ * 2. Reads a CSV file mapping ICD-10 codes to HCC (Hierarchical Condition Category) values.
+ * 3. Uses an internal parser (parseFiles) to transform the raw inputs into a JSON-serializable structure or string.
+ * 4. Writes the resulting JSON content to the provided output filepath.
+ *
+ * @param {string} descriptionPath - Absolute or relative path to the ICD code/description text file (UTF-8 encoded).
+ * @param {string} hccPath - Absolute or relative path to the ICD-10/HCC mapping CSV file (UTF-8 encoded).
+ * @param {string} jsonPath - Destination file path where the generated JSON content will be written.
+ * @throws {Error} If any file read operation fails, if parsing fails, or if writing the output file fails.
+ * @see parseFiles For the underlying transformation logic (must be available in scope).
+ * @example
+ * writeJSONLibrary(
+ *   './data/icd_descriptions.txt',
+ *   './data/icd_hcc_mapping.csv',
+ *   './dist/icd_hcc_library.json'
+ * );
+ */
+function writeJSONLibrary(descriptionPath, hccPath, jsonPath) {
     // Parse ICD Code/Description text file
-    const icdDescriptionFile = fs.readFileSync(icdDescriptionsFilePath, 'utf8');
+    const icdDescriptionFile = fs.readFileSync(descriptionPath, 'utf8');
 
     // Parse ICD-10/HCC Mapping CSV
-    const hccMappingFile = fs.readFileSync(hccMappingsFilePath, 'utf8');
+    const hccMappingFile = fs.readFileSync(hccPath, 'utf8');
 
     const results = parseFiles(icdDescriptionFile, hccMappingFile);
 
     // Write directory
-    fs.writeFileSync(icdCodesJsonFilePath, results);
+    fs.writeFileSync(jsonPath, results);
 }
 
 export default writeJSONLibrary;

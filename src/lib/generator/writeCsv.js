@@ -1,8 +1,5 @@
 import fs from 'fs';
-
 import _ from 'lodash';
-
-import { icdCodesJsonFilePath, icdCodesCsvFilePath } from '.';
 
 /**
  * @param {App.CodeEntry[]} jsonLibrary
@@ -18,11 +15,27 @@ export function mapCsv(jsonLibrary) {
     return rows.join('\n');
 }
 
-function writeCsvLibrary() {
+/**
+ * Converts a JSON library file (array of App.CodeEntry objects) to CSV and writes it to disk.
+ *
+ * Reads the JSON content from jsonFilePath, parses it as an array of App.CodeEntry, transforms
+ * the data to CSV format via mapCsv(jsonLibrary), and writes the resulting CSV string to csvFilePath.
+ *
+ * @param {string} jsonFilePath - Path to the source JSON file containing an array of App.CodeEntry objects.
+ * @param {string} csvFilePath - Destination file path where the generated CSV content will be written (overwrites if existing).
+ *
+ * @throws {SyntaxError} If the JSON file content is not valid JSON.
+ * @throws {Error} If reading from jsonFilePath or writing to csvFilePath fails (e.g., permissions, ENOENT).
+ *
+ * @see App.CodeEntry
+ * @see mapCsv
+ * @returns {void}
+ */
+function writeCsvLibrary(jsonFilePath, csvFilePath) {
     /**@type {Array<App.CodeEntry>} */
-    const jsonLibrary = JSON.parse(fs.readFileSync(icdCodesJsonFilePath, 'utf8'));
+    const jsonLibrary = JSON.parse(fs.readFileSync(jsonFilePath, 'utf8'));
 
-    fs.writeFileSync(icdCodesCsvFilePath, mapCsv(jsonLibrary));
+    fs.writeFileSync(csvFilePath, mapCsv(jsonLibrary));
 }
 
 export default writeCsvLibrary;

@@ -49,3 +49,13 @@ export function isValidIcdLength(length) {
     // Valid ICD codes are between 3 and 7 characters long without a period
     return _.inRange(length, 3, 8);
 }
+
+/**
+ * Extracts a 4-digit year from a file name.
+ * @param {string} fileName - The file name to extract the year from.
+ * @returns {number} The extracted year, or 0 if not found.
+ */
+export function parseYearFromName(fileName) {
+    const match = fileName.match(/(\d{4})/);
+    return match ? Number(match[1]) : 0;
+}
